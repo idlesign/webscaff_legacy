@@ -38,7 +38,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
 
-    install_requires=[],
+    install_requires=['fabric'],
     setup_requires=[] + PYTEST_RUNNER,
     tests_require=['pytest'],
 
