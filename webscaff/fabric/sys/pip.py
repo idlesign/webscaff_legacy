@@ -55,7 +55,7 @@ def upgrade(package):
 
 
 @task
-def upgrade_reqs():
+def upgrade_req():
     """Upgrades env with requirements from file."""
     path_local, path_remote = get_paths(path.join(PROJECT_NAME, PIP_REQUIREMENTS_FILENAME))
     put(path_local, path_remote)
