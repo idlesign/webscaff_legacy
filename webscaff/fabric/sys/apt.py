@@ -19,9 +19,15 @@ BOOTSTRAP_SYSTEM_PACKAGES = [
 
 
 @task
+def upgrade_os():
+    """Initiates remote OS packages update and upgrade procedure."""
+    update()
+    upgrade()
+
+
+@task
 def upgrade():
     """Initiates remote OS upgrade procedure."""
-    update()
     sudo('apt-get upgrade')
 
 
