@@ -1,4 +1,4 @@
-from os import path
+from os import path, makedirs
 from datetime import datetime
 
 from fabric.api import task, get
@@ -16,8 +16,8 @@ from ..sys.uwsgi import bootstrap as uwsgi_bootstrap,  reload_touch as uwsgi_rel
 from ..sys.utils import reboot
 from ..django.utils import put as dj_put_settings
 from ..django.manage import manage as dj_manage, migrate as dj_migrate, create_superuser as dj_create_superuser
-from ..settings import PROJECT_NAME, PROJECT_USER, PROJECT_GROUP, WEBSERVER_USER, PATH_PYTHON, PATH_REMOTE_PROJECT_BASE, \
-    GIT_REPO, PATH_REMOTE_PROJECT, PATH_TEMP
+from ..settings import PROJECT_NAME, PROJECT_USER, PROJECT_GROUP, WEBSERVER_USER, PATH_PYTHON, \
+    PATH_REMOTE_PROJECT_BASE, GIT_REPO, PATH_REMOTE_PROJECT, PATH_TEMP, PATH_LOCAL_PROJECT_BASE
 
 from .fs import upload_configs as project_upload_configs
 
@@ -37,11 +37,11 @@ def update(deep=False):
 def dump():
     """Dumps remote project directories and DB."""
 
-    date_str = datetime.now().strftime('%Y-%m-%d')
+    date_str = datetime.now().strftime('%Y-%m-%dT%H%M')
     dump_basename = '%s-%s_dump' % (date_str, PROJECT_NAME)
     path_dump = path.join(PATH_TEMP, dump_basename)
 
-    fs_mkdir(path_dump)
+    fs_mkdir(path_dump, use_sudo=False)
 
     fs_gzip_dir(
         path.join(PATH_REMOTE_PROJECT, 'data', 'media'),
@@ -51,7 +51,14 @@ def dump():
 
     path_dump_arch = fs_gzip_dir(path_dump, path.join(PATH_TEMP, dump_basename))
 
-    get(path_dump_arch, local_path=path.abspath(path.dirname(__file__)))
+    path_dump_local = path.join(PATH_LOCAL_PROJECT_BASE, 'dumps')
+
+    try:
+        makedirs(path_dump_local)
+    except OSError:
+        pass  # Already exists.
+
+    get(path_dump_arch, local_path=path_dump_local)
 
     fs_rm(path_dump)
     fs_rm(path_dump_arch)
