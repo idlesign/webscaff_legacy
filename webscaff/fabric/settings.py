@@ -1,4 +1,4 @@
-from os import path
+from os import path, getcwd
 
 from fabric.api import env
 
@@ -17,7 +17,7 @@ PATH_PYTHON = '/usr/bin/python3'
 PATH_REMOTE_PROJECT_BASE = '/var/www/%s/' % PROJECT_NAME
 PATH_REMOTE_PROJECT = path.join(PATH_REMOTE_PROJECT_BASE, PROJECT_NAME)
 
-PATH_LOCAL_PROJECT_BASE = path.dirname(__file__)
+PATH_LOCAL_PROJECT_BASE = getcwd()
 PATH_LOCAL_PROJECT = path.join(PATH_LOCAL_PROJECT_BASE, PROJECT_NAME)
 
 NAME_CONFIGS_DIR = 'conf'
