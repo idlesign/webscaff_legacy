@@ -31,7 +31,7 @@ def get_version():
 def dump(db_name, target_dir):
     """Dumps DB by name into target directory."""
     target_path = path.join(target_dir, 'db.sql')
-    sudo('pg_dump %s > %s' % (db_name, target_path))
+    run('pg_dump %s > %s' % (db_name, target_path))
     return target_path
 
 
