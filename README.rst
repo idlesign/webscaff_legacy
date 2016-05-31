@@ -27,6 +27,22 @@ Contains:
 * Useful Fabric commands for managing your project (this includes Django-specific commands).
 
 
+Command examples:
+
+.. code-block:: bash
+
+    # Update project code from repository.
+    $ fab update -c .fab.conf
+
+    # Get remote code and DB dumped as .tar.gz.
+    $ fab dump -c .fab.conf
+
+    # Upgrade OS packages.
+    $ fab upgrade_os -c .fab.conf
+
+    # Upgrade project requirements via PIP.
+    $ fab upgrade_req -c .fab.conf
+
 
 Requirements
 ------------
