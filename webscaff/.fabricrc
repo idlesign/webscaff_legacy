@@ -1,0 +1,14 @@
+# Git repository URL to get project sources from.
+git_repo = https://mygit.some/myproject
+
+# Webserver username. Default: www-data.
+# webserver_user = www-data
+
+# Domain name or IP address to connect to.
+host = mydomain.some
+
+# Your web project name (also a username).
+project_name = myproject
+
+# User password
+password = somepassword
