@@ -4,9 +4,10 @@ from ..settings import PROJECT_USER, PROJECT_GROUP
 
 
 @task
-def mkdir(path):
+def mkdir(path, use_sudo=True):
     """Creates a directory."""
-    sudo('mkdir -p %s' % path)
+    command = sudo if use_sudo else run
+    command('mkdir -p %s' % path)
 
 
 @task
