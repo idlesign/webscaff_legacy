@@ -1,2 +1,2 @@
-from .manage import *
-from .utils import *
+from . import manage
+from . import utils

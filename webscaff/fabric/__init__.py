@@ -1,3 +1,3 @@
-from .sys import *
-from .project import *
-from .django import *
+from . import sys
+from . import project
+from . import django
