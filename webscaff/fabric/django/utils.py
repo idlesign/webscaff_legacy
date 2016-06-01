@@ -9,7 +9,7 @@ from ..utils import get_paths
 
 
 @task
-def put():
+def put_settings():
     """Puts Django production settings file to remote and reloads uwsgi."""
     # todo set DEBUG=False automatically
     path_local, path_remote = get_paths('%s/settings/prod.py' % PROJECT_NAME)
