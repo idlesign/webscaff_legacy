@@ -50,3 +50,19 @@ Requirements
 * Debian-based OS (e.g. Ubuntu)
 * Python 3.2+
 * Django (advised)
+
+
+Expectations
+------------
+
+Expected project layout::
+
+    <project_name>/conf/                            * Configs (nginx, uwsgi, etc.)
+    <project_name>/venv/                            * Virtual environment
+    <project_name>/fabfile.py                       * Fabric commands file
+    <project_name>/.fab.conf                        * Fabric config file
+    <project_name>/setup.py                         * Minimal setup file
+    <project_name>/<project_name>/requirements.txt  * PIP requirements
+    <project_name>/<project_name>/wsgi.py           * wsgi application file
+    <project_name>/<project_name>/manage.py         * Manage file
+    <project_name>/<project_name>/settings/prod.py  * Production settings
