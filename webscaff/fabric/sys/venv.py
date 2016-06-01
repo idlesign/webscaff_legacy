@@ -22,4 +22,5 @@ def venv():
 def create(python_path):
     """Creates virtual environment using given Python interpreter path."""
     with cd(PATH_REMOTE_PROJECT_BASE):
-        run('virtualenv -p %s %s/' % (python_path, NAME_VIRTUALENV_DIR))
+        # Call as module in case `virtualenv` app is not [yet] available.
+        run('python -m virtualenv -p %s %s/' % (python_path, NAME_VIRTUALENV_DIR))
