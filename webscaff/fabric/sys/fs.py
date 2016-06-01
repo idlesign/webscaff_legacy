@@ -57,3 +57,9 @@ def rm(target, force=True, use_local=True):
 def append_to_file(string, fpath):
     """Appends a string into file."""
     sudo('echo %s >> %s' % (string, fpath))
+
+
+@task
+def touch(fpath):
+    """Creates a file or updates modified date if already exists."""
+    run('touch %s' % fpath)
