@@ -2,6 +2,12 @@ from fabric.api import task, sudo
 
 
 @task
+def create(user):
+    """Creates a user."""
+    sudo('adduser %s' % user)
+
+
+@task
 def add_to_sudoers(user):
     """Adds a user to sudoers."""
     sudo("echo '%s ALL=(ALL:ALL) ALL' >> /etc/sudoers" % user)
