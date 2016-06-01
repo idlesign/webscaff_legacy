@@ -7,9 +7,15 @@ from .nginx import maintenance as nginx_maintenance, stopped as nginx_stopped
 
 @task
 def status():
-    """Returns remote basic status information, including uptime."""
-    run('uname -a')
+    """Prints out basic remote status information, including uptime."""
     run('uptime')
+
+
+@task
+def info():
+    """Prints out remote system information, including kernel info and timezone."""
+    run('uname -a')
+    run('cat /etc/timezone')
 
 
 @task
