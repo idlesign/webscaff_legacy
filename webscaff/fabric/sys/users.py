@@ -1,5 +1,7 @@
 from fabric.api import task, sudo
 
+from .fs import append_to_file
+
 
 @task
 def create(user):
@@ -10,7 +12,7 @@ def create(user):
 @task
 def add_to_sudoers(user):
     """Adds a user to sudoers."""
-    sudo("echo '%s ALL=(ALL:ALL) ALL' >> /etc/sudoers" % user)
+    append_to_file("'%s ALL=(ALL:ALL) ALL'", '/etc/sudoers')
 
 
 @task

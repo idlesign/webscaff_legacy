@@ -51,3 +51,9 @@ def rm(target, force=True, use_local=True):
     """Removes target file or directory."""
     command = local if use_local else sudo
     command('rm %s %s' % ('-f' if force else '', target))
+
+
+@task
+def append_to_file(string, fpath):
+    """Appends a string into file."""
+    sudo('echo %s >> %s' % (string, fpath))
