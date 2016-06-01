@@ -25,18 +25,19 @@ def install_from_vcs(package, vcs_path):
 
 
 @task
-def install(package='', update=False, from_req=False):
+def install(package='', update=False, from_req=False, editable=False):
     """Installs python package(s) using pip
 
     :param str|list package:
     :param bool update:
     :param bool from_req:
+    :param bool editable: Editable install, aka developer install.
 
     """
-    update_flag = ''
+    flags = []
 
-    if update:
-        update_flag = '-U'
+    update and flags.append('-U')
+    editable and flags.append('-e')
 
     if from_req:
         package = '-r %s' % PIP_REQUIREMENTS_FILENAME
@@ -45,7 +46,7 @@ def install(package='', update=False, from_req=False):
         package = [package]
 
     with venv():
-        run('pip install %s %s' % (update_flag, ' '.join(package)))
+        run('pip install %s %s' % (' '.join(flags), ' '.join(package)))
 
 
 @task
