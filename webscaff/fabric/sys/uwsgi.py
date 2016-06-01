@@ -1,10 +1,10 @@
 from os import path
 
-from fabric.api import task, sudo, run
+from fabric.api import task, sudo, warn_only
 
 from ..settings import PROJECT_NAME, PATH_REMOTE_PROJECT_BASE, NAME_CONFIGS_DIR
 from ..utils import get_symlink_command, get_paths
-from .fs import tail
+from .fs import tail, touch
 
 
 UWSGI_APPS_PATH = '/etc/uwsgi/apps-enabled/'
@@ -44,12 +44,15 @@ def reload(force=False):
 @task
 def reload_touch():
     """Touches a file to initiate uwsgi reload procedure."""
-    run('touch %s' % UWSGI_TOUCH_RELOAD_FILEPATH)
+    with warn_only():
+        touch(UWSGI_TOUCH_RELOAD_FILEPATH)
 
 
 @task
 def bootstrap():
     """Bootstraps uWSGI for the project."""
+    touch(UWSGI_TOUCH_RELOAD_FILEPATH)  # Create reload file.
+
     uwsgi_config = path.join(get_paths(NAME_CONFIGS_DIR)[1], 'uwsgi.ini')
     sudo(get_symlink_command(uwsgi_config, UWSGI_INI_FILEPATH))
 
