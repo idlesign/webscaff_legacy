@@ -3,9 +3,15 @@ from os import path, getcwd
 from fabric.api import env
 
 
+USER = env.user
+PASSWORD = env.password
+
 HOST = env.host
 PROJECT_NAME = env.project_name
+
 GIT_REPO = env.git_repo
+GIT_REPO_EXTENDED = bool(getattr(env, 'repo_extended', False))
+
 WEBSERVER_USER = getattr(env, 'webserver_user', 'www-data')
 
 PROJECT_USER = PROJECT_NAME
@@ -22,4 +28,6 @@ PATH_LOCAL_PROJECT = path.join(PATH_LOCAL_PROJECT_BASE, PROJECT_NAME)
 
 NAME_CONFIGS_DIR = 'conf'
 
-env.hosts = ['%s@%s' % (PROJECT_USER, HOST)]
+PATH_GIT_ROOT = PATH_REMOTE_PROJECT_BASE if GIT_REPO_EXTENDED else PATH_REMOTE_PROJECT
+
+env.hosts = ['%s@%s' % (USER, HOST)]
