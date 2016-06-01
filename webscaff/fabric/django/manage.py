@@ -1,10 +1,10 @@
 from os import path
 
-from fabric.api import task, run, get, put
+from fabric.api import task, run, get, put, cd
 
 from ..sys.venv import venv
 from ..sys.fs import rm, gzip_dir
-from ..settings import PROJECT_NAME, PATH_TEMP
+from ..settings import PROJECT_NAME, PATH_TEMP, PATH_REMOTE_PROJECT
 
 
 @task
@@ -18,8 +18,9 @@ def manage(cmd):
         cmd = [cmd]
 
     with venv():
-        for c in cmd:
-            run('python manage.py %s' % c)
+        with cd(PATH_REMOTE_PROJECT):
+            for c in cmd:
+                run('python manage.py %s' % c)
 
 
 @task
