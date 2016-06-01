@@ -4,7 +4,7 @@ from fabric.api import task, put
 from fabric.contrib.project import upload_project
 
 from ..sys.fs import create_dir as fs_create_dir
-from ..sys.uwsgi import UWSGI_TOUCH_RELOAD_FILE, reload_touch as uwsgi_reload_touch
+from ..sys.uwsgi import reload_touch as uwsgi_reload_touch
 from ..utils import get_paths
 from ..settings import NAME_CONFIGS_DIR
 
@@ -12,9 +12,6 @@ from ..settings import NAME_CONFIGS_DIR
 @task
 def upload_configs():
     """Uploads project configuration files (under `conf` dir) to remote."""
-    path_local, path_remote = get_paths(UWSGI_TOUCH_RELOAD_FILE)
-    put(path_local, path_remote)
-
     path_local, path_remote = get_paths(NAME_CONFIGS_DIR)
     fs_create_dir(path_remote)
     upload_project(path_local, path.dirname(path_remote))
