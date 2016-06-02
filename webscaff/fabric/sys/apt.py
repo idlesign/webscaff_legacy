@@ -6,12 +6,15 @@ BOOTSTRAP_SYSTEM_PACKAGES = [
     'nginx',
     'uwsgi uwsgi-plugin-python3',
 
+    'build-essential',
+
     'python3-dev',
     'python3-pip',
     'python-virtualenv',
 
     'postgresql',
     'libpq-dev',
+    'python3-psycopg2',
 
     # Pillow requirement.
     'libjpeg-dev',
