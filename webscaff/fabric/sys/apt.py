@@ -18,6 +18,9 @@ BOOTSTRAP_SYSTEM_PACKAGES = [
 
     # Pillow requirement.
     'libjpeg-dev',
+    # lxml requirement.
+    'libxml2-dev',
+    'libxslt1-dev',
 ]
 
 
