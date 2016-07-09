@@ -2,7 +2,7 @@ from os import path
 
 from fabric.api import task, sudo, settings, run
 
-from ..settings import PROJECT_NAME, NAME_CONFIGS_DIR
+from ..settings import PROJECT_NAME, NAME_CONFIGS_DIR, PROJECT_USER
 from ..utils import get_symlink_command, get_paths
 from .fs import append_to_file
 
@@ -17,6 +17,12 @@ def restart():
 def reload():
     """Reloads PostgreSQL."""
     sudo('service postgresql reload')
+
+
+@task
+def psql():
+    """Launches psql command line utility."""
+    sudo('psql', user=PROJECT_USER)
 
 
 @task
