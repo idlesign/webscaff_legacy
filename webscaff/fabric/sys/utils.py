@@ -16,6 +16,7 @@ def info():
     """Prints out remote system information, including kernel info and timezone."""
     run('uname -a')
     run('cat /etc/timezone')
+    run('df -h')
 
 
 @task
