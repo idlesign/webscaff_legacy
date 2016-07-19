@@ -74,9 +74,8 @@ def bootstrap():
 
     venv.create(PATH_PYTHON)
 
-    with cd(PATH_GIT_ROOT):
-        pip.install(package='.', editable=True)
-        pip.install(from_req=True)
+    pip.install(package='.', editable=True)
+    pip.install(from_req=True)
 
     project_fs.upload_configs()
     put_settings(reload_uwsgi=False)

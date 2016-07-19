@@ -1,12 +1,12 @@
 from os import path
 
-from fabric.api import task, run, put, lcd, local
+from fabric.api import task, run, put, lcd, local, cd
 
 from .venv import venv
 from .uwsgi import reload_touch
 
 from ..utils import get_paths
-from ..settings import PROJECT_NAME, PATH_LOCAL_PROJECT
+from ..settings import PROJECT_NAME, PATH_LOCAL_PROJECT, PATH_GIT_ROOT
 
 
 PIP_REQUIREMENTS_FILENAME = 'requirements.txt'
@@ -45,8 +45,9 @@ def install(package='', update=False, from_req=False, editable=False):
     if not isinstance(package, list):
         package = [package]
 
-    with venv():
-        run('pip install %s %s' % (' '.join(flags), ' '.join(package)))
+    with cd(PATH_GIT_ROOT):
+        with venv():
+            run('pip install %s %s' % (' '.join(flags), ' '.join(package)))
 
 
 @task
