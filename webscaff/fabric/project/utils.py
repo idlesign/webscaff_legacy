@@ -91,6 +91,6 @@ def bootstrap():
 
 
 @task
-def show_log():
+def log_debug():
     """Tails project debug log from temporary directory."""
     fs.tail('/tmp/%s_debug.log' % PROJECT_NAME)
