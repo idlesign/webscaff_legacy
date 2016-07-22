@@ -4,7 +4,7 @@ from fabric.api import task, sudo, settings, run
 
 from ..settings import PROJECT_NAME, NAME_CONFIGS_DIR, PROJECT_USER
 from ..utils import get_symlink_command, get_paths
-from .fs import append_to_file
+from .fs import append_to_file, tail
 
 
 @task
@@ -32,6 +32,12 @@ def get_version():
     version = version.split(' ')[-1].split('.')
     print('PostgreSQL version: %s' % version)
     return version
+
+
+@task
+def log_main():
+    """Tails PostgreSQL log."""
+    tail('/var/log/postgresql/postgresql-%s-main.log' % '.'.join(get_version()[:2]))
 
 
 @task
