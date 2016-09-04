@@ -14,7 +14,7 @@ NGINX_MAINTENANCE_FILEPATH = path.join(PATH_REMOTE_PROJECT_BASE, '503')
 @contextmanager
 def stopped():
     """Temporarily stops Nginx."""
-    sudo('service nginx stop')
+    stop()
     try:
         yield
 
@@ -31,6 +31,12 @@ def maintenance():
 
     finally:
         maintenance_off()
+
+
+@task
+def stop():
+    """Stops nginx."""
+    sudo('service nginx stop')
 
 
 @task
