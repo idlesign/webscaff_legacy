@@ -11,6 +11,12 @@ def mkdir(path, use_sudo=True):
 
 
 @task
+def chmod(path, mode):
+    """Change fs object permissions."""
+    sudo('chmod %s %s' % (mode, path))
+
+
+@task
 def set_owner(path, user, group):
     """Sets owner for path contents recursively."""
     sudo('chown -R %s:%s %s' % (user, group, path))
@@ -48,9 +54,9 @@ def tail(fname):
 
 @task
 def rm(target, force=True, use_local=True):
-    """Removes target file or directory."""
+    """Removes target file or directory recursively."""
     command = local if use_local else sudo
-    command('rm %s %s' % ('-f' if force else '', target))
+    command('rm -r%s %s' % ('f' if force else '', target))
 
 
 @task
