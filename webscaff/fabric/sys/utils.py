@@ -1,5 +1,6 @@
 from fabric.api import task, sudo, run
 
+from .fs import chmod
 from .apt import upgrade as apt_upgrade
 from .certs import update as certs_update
 from .nginx import maintenance as nginx_maintenance, stopped as nginx_stopped
@@ -44,7 +45,7 @@ def swap_make():
     """Creates a swap file."""
     swap_file = '/swapfile'
     sudo('dd if=/dev/zero of=%s bs=1024 count=524288' % swap_file)
-    sudo('chmod 600 %s' % swap_file)
+    chmod(swap_file, 600)
     sudo('mkswap %s' % swap_file)
     swap_on()
 
