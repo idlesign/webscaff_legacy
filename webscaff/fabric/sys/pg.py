@@ -24,7 +24,7 @@ def psql(command=None):
     """Launches psql command line utility."""
     command = command or ''
     if command:
-        command = ' -%s %s' % ('f' if '/' in command else 'c', command)
+        command = ' -%s "%s"' % ('f' if '/' in command else 'c', command)
 
     sudo('psql%s' % command, user=PROJECT_USER)
 
@@ -60,6 +60,16 @@ def sizes(limit=10):
     command = command.replace('    ', '')
     command = make_tmp_file(command)
     psql(command)
+
+
+@task
+def reindex(table):
+    """Launches psql command to reindex given table.
+
+    Useful to reclaim space from bloated indexes.
+
+    """
+    psql('REINDEX TABLE %s' % table)
 
 
 @task
