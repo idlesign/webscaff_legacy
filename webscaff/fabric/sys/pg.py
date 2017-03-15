@@ -4,7 +4,7 @@ from fabric.api import task, sudo, settings, run
 
 from ..settings import PROJECT_NAME, NAME_CONFIGS_DIR, PROJECT_USER
 from ..utils import get_symlink_command, get_paths
-from .fs import append_to_file, tail
+from .fs import append_to_file, tail, make_tmp_file
 
 
 @task
@@ -20,9 +20,46 @@ def reload():
 
 
 @task
-def psql():
+def psql(command=None):
     """Launches psql command line utility."""
-    sudo('psql', user=PROJECT_USER)
+    command = command or ''
+    if command:
+        command = ' -%s %s' % ('f' if '/' in command else 'c', command)
+
+    sudo('psql%s' % command, user=PROJECT_USER)
+
+
+@task
+def sizes(limit=10):
+    """Launches psql command to output top n table sizes."""
+    command = '''
+    SELECT
+        name AS "Table",
+        pg_size_pretty(size_data) AS "Size Data",
+        pg_size_pretty(size_idx) AS "Size Indexes",
+        pg_size_pretty(size_total) AS "Size Total"
+
+    FROM (
+
+        SELECT
+            name,
+            pg_table_size(path) AS size_data,
+            pg_indexes_size(path) AS size_idx,
+            pg_total_relation_size(path) AS size_total
+
+        FROM (
+            SELECT
+              ('"' || table_schema || '"."' || table_name || '"') AS path,
+              (table_schema || '.' || table_name) AS name
+            FROM information_schema.tables
+        ) AS tables
+        ORDER BY size_total DESC
+
+    ) AS pretty_sizes LIMIT %s;
+    ''' % limit
+    command = command.replace('    ', '')
+    command = make_tmp_file(command)
+    psql(command)
 
 
 @task
