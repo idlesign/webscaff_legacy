@@ -1,4 +1,7 @@
-from fabric.api import task, sudo, run, local
+from uuid import uuid4
+
+from fabric.api import task, sudo, run, local, put, hide
+from fabric.contrib.files import append
 
 from ..settings import PROJECT_USER, PROJECT_GROUP
 
@@ -62,10 +65,23 @@ def rm(target, force=True, use_local=True):
 @task
 def append_to_file(string, fpath):
     """Appends a string into file."""
-    sudo('echo %s >> %s' % (string, fpath))
+    with hide('running'):
+        append(fpath, string, use_sudo=True)
 
 
 @task
 def touch(fpath):
     """Creates a file or updates modified date if already exists."""
     run('touch %s' % fpath)
+
+
+def make_tmp_file(contents):
+    """Makes a temporary file with the given context."""
+    fpath = '/tmp/wscf_%s' % uuid4()
+
+    with open(fpath, 'w') as f:
+        f.write(contents)
+
+    append_to_file(contents, fpath)
+    put(fpath, fpath)
+    return fpath
