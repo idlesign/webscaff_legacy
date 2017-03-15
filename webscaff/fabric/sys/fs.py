@@ -83,5 +83,5 @@ def make_tmp_file(contents):
         f.write(contents)
 
     append_to_file(contents, fpath)
-    put(fpath, fpath)
+    put(fpath, fpath, use_sudo=True)
     return fpath
