@@ -1,6 +1,6 @@
 from os import path
 
-from fabric.api import task, run, get, put, cd
+from fabric.api import task, get, put, cd, sudo
 
 from ..sys.venv import venv
 from ..sys.fs import rm, gzip_dir
@@ -20,7 +20,7 @@ def manage(cmd):
     with venv():
         with cd(PATH_REMOTE_PROJECT):
             for c in cmd:
-                run('python manage.py %s' % c)
+                sudo('python manage.py %s' % c)
 
 
 @task
