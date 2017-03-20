@@ -7,6 +7,18 @@ from .nginx import maintenance as nginx_maintenance, stopped as nginx_stopped
 
 
 @task
+def set_locale(locale='ru_RU'):
+    """Generates and sets given UTF-8 locale.
+
+    Default: ru_Ru
+
+    """
+    sudo('locale-gen "%s.UTF-8"' % locale)
+    sudo('dpkg-reconfigure locales')
+    sudo('update-locale LC_ALL=%(locale)s.UTF-8 LANG=%(locale)s.UTF-8' % {'locale': locale})
+
+
+@task
 def status():
     """Prints out basic remote status information, including uptime."""
     run('uptime')
