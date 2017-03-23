@@ -32,16 +32,16 @@ Command examples:
 .. code-block:: bash
 
     # Update project code from repository.
-    $ fab update -c .fab.conf
+    $ fab -c .fab.conf update
 
     # Get remote code and DB dumped as .tar.gz.
-    $ fab dump -c .fab.conf
+    $ fab -c .fab.conf dump
 
     # Upgrade OS packages.
-    $ fab upgrade_os -c .fab.conf
+    $ fab -c .fab.conf upgrade_os
 
     # Upgrade project requirements via PIP.
-    $ fab upgrade_req -c .fab.conf
+    $ fab -c .fab.conf upgrade_req
 
 
 Requirements
