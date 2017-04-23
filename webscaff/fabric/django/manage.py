@@ -1,6 +1,6 @@
 from os import path
 
-from fabric.api import task, get, put, cd, sudo
+from fabric.api import task, get, put, cd, sudo, run
 
 from ..sys.venv import venv
 from ..sys.fs import rm, gzip_dir
@@ -8,19 +8,21 @@ from ..settings import PROJECT_NAME, PATH_TEMP, PATH_REMOTE_PROJECT
 
 
 @task
-def manage(cmd):
+def manage(cmd, use_sudo=1):
     """Runs Django manage command(s).
 
     :param str|list cmd:
+    :param bool use_sudo:
 
     """
     if not isinstance(cmd, list):
         cmd = [cmd]
 
+    func = sudo if int(use_sudo) else run
     with venv():
         with cd(PATH_REMOTE_PROJECT):
             for c in cmd:
-                sudo('python manage.py %s' % c)
+                func('python manage.py %s' % c)
 
 
 @task
