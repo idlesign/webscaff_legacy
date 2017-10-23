@@ -15,7 +15,7 @@ DIR_CACHE = '/tmp/django_cache/'
 def put_settings(reload_uwsgi=True):
     """Puts Django production settings file to remote and reloads uwsgi."""
     # todo set DEBUG=False automatically
-    path_local, path_remote = get_paths('%s/settings/prod.py' % PROJECT_NAME)
+    path_local, path_remote = get_paths('%s/settings/settings_production.py' % PROJECT_NAME)
     create_dir(path.dirname(path_remote))
     fabric_put(path_local, path_remote)
 
