@@ -5,9 +5,6 @@ https://github.com/idlesign/webscaff
 .. image:: https://img.shields.io/pypi/v/webscaff.svg
     :target: https://pypi.python.org/pypi/webscaff
 
-.. image:: https://img.shields.io/pypi/dm/webscaff.svg
-    :target: https://pypi.python.org/pypi/webscaff
-
 .. image:: https://img.shields.io/pypi/l/webscaff.svg
     :target: https://pypi.python.org/pypi/webscaff
 
@@ -23,7 +20,7 @@ But not only that, this also will help you managing it: deployment, system upgra
 
 Contains:
 
-* Configuration samples for Nginx, PosgreSQL, uWSGI.
+* Configuration samples for Nginx, PostgreSQL, uWSGI.
 * Useful Fabric commands for managing your project (this includes Django-specific commands).
 
 
