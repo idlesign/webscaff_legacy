@@ -2,6 +2,7 @@ from fabric.api import task, sudo
 
 from ..settings import PROJECT_NAME
 
+__all__ = ['update']
 
 @task
 def update():

@@ -1,11 +1,13 @@
+from fabric.api import task, sudo, settings, run
 from os import path
 
-from fabric.api import task, sudo, settings, run
-
+from .fs import append_to_file, tail, make_tmp_file
 from ..settings import PROJECT_NAME, NAME_CONFIGS_DIR, PROJECT_USER
 from ..utils import get_symlink_command, get_paths
-from .fs import append_to_file, tail, make_tmp_file
 
+__all__ = [
+    'restart', 'reload', 'psql', 'sizes', 'reindex', 'get_version', 'log_main',
+    'dump', 'bootstrap']
 
 @task
 def restart():

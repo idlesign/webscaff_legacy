@@ -1,15 +1,16 @@
+from fabric.api import task, run, put, lcd, local, cd
 from os import path
 
-from fabric.api import task, run, put, lcd, local, cd
-
-from .venv import venv
 from .uwsgi import reload_touch
-
-from ..utils import get_paths
+from .venv import venv
 from ..settings import PROJECT_NAME, PATH_LOCAL_PROJECT, PATH_GIT_ROOT
-
+from ..utils import get_paths
 
 PIP_REQUIREMENTS_FILENAME = 'requirements.txt'
+
+__all__ = [
+    'install_from_vcs', 'install', 'upgrade', 'upgrade_req', 'freeze',
+]
 
 
 @task

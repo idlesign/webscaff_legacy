@@ -23,6 +23,7 @@ BOOTSTRAP_SYSTEM_PACKAGES = [
     'libxslt1-dev',
 ]
 
+__all__ = ['upgrade_os', 'update', 'upgrade', 'install', 'remove', 'bootstrap']
 
 @task
 def upgrade_os():

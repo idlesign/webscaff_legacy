@@ -1,10 +1,12 @@
-from uuid import uuid4
-
 from fabric.api import task, sudo, run, local, put, hide
 from fabric.contrib.files import append
+from uuid import uuid4
 
 from ..settings import PROJECT_USER, PROJECT_GROUP
 
+__all__ = [
+    'mkdir', 'chmod', 'set_owner', 'create_dir', 'gzip_dir', 'tail',
+    'rm', 'append_to_file', 'touch', 'make_tmp_file']
 
 @task
 def mkdir(path, use_sudo=True):

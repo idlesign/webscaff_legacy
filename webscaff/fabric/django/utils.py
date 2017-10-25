@@ -2,13 +2,15 @@ from os import path
 
 from fabric.api import task, put as fabric_put
 
-from ..sys.uwsgi import reload_touch
-from ..sys.fs import create_dir, rm, chmod
 from ..settings import PROJECT_NAME
+from ..sys.fs import create_dir, rm, chmod
+from ..sys.uwsgi import reload_touch
 from ..utils import get_paths
 
-
 DIR_CACHE = '/tmp/django_cache/'
+
+
+__all__ = ['put_settings', 'cache_fs_drop', 'cache_fs_init']
 
 
 @task

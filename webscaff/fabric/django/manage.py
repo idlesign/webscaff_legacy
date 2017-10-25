@@ -2,10 +2,12 @@ from os import path
 
 from fabric.api import task, get, put, cd, sudo, run
 
-from ..sys.venv import venv
-from ..sys.fs import rm, gzip_dir
 from ..settings import PROJECT_NAME, PATH_TEMP, PATH_REMOTE_PROJECT
+from ..sys.fs import rm, gzip_dir
+from ..sys.venv import venv
 
+__all__ = [
+    'manage', 'migrate', 'create_superuser', 'loaddata', 'dumpdata']
 
 @task
 def manage(cmd, use_sudo=1):

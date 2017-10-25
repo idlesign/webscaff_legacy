@@ -1,19 +1,18 @@
-from os import path, makedirs
 from datetime import datetime
+from os import path, makedirs
 
-from fabric.api import task, get, cd
+from fabric.api import task, get
 from fabric.contrib.files import exists
 
-from ..sys import apt, venv, fs, users, pip, git, nginx, uwsgi, utils, pg
-from ..django.utils import put_settings
+from . import fs as project_fs
 from ..django.manage import migrate as dj_migrate, manage as dj_manage, create_superuser as dj_create_superuser
-
+from ..django.utils import put_settings
 from ..settings import PROJECT_NAME, PROJECT_USER, PROJECT_GROUP, WEBSERVER_USER, PATH_PYTHON, \
     PATH_REMOTE_PROJECT_BASE, GIT_REPO, PATH_REMOTE_PROJECT, PATH_TEMP, PATH_LOCAL_PROJECT_BASE, GIT_REPO_EXTENDED, \
     PATH_GIT_ROOT
+from ..sys import apt, venv, fs, users, pip, git, nginx, uwsgi, utils, pg
 
-from . import fs as project_fs
-
+__all__ = ['update', 'dump', 'bootstrap', 'log_debug']
 
 @task
 def update(deep=False):

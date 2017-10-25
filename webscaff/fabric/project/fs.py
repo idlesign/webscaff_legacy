@@ -3,10 +3,12 @@ from os import path
 from fabric.api import task, put
 from fabric.contrib.project import upload_project
 
+from ..settings import NAME_CONFIGS_DIR
 from ..sys.fs import create_dir as fs_create_dir
 from ..sys.uwsgi import reload_touch as uwsgi_reload_touch
 from ..utils import get_paths
-from ..settings import NAME_CONFIGS_DIR
+
+__all__ = ['upload_configs', 'put_files']
 
 
 @task

@@ -1,9 +1,13 @@
 from fabric.api import task, sudo, run
 
-from .fs import chmod
 from .apt import upgrade as apt_upgrade
 from .certs import update as certs_update
+from .fs import chmod
 from .nginx import maintenance as nginx_maintenance, stopped as nginx_stopped
+
+__all__ = [
+    'set_locale', 'status', 'info', 'reboot', 'upgrade_os_packages',
+    'update_certs', 'swap_make', 'swap_on', 'swap_off']
 
 
 @task

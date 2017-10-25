@@ -1,14 +1,15 @@
-from os import path
 from contextlib import contextmanager
-
 from fabric.api import cd, prefix, task, run
 from fabric.contrib.files import exists
+from os import path
 
-from ..settings import PATH_REMOTE_PROJECT_BASE, PATH_REMOTE_PROJECT
-
+from ..settings import PATH_REMOTE_PROJECT_BASE
 
 NAME_VIRTUALENV_DIR = 'venv'
 PATH_VENV = path.join(PATH_REMOTE_PROJECT_BASE, NAME_VIRTUALENV_DIR)
+
+
+__all__ = ['venv', 'create']
 
 
 @contextmanager

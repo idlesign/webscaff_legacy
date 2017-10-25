@@ -1,6 +1,8 @@
 from fabric.api import task, cd, run
 
 
+__all__ = ['clone', 'pull']
+
 @task
 def clone(path_base, repo_url, dir_target):
     """Clones a remote repository."""

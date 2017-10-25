@@ -1,6 +1,8 @@
-from fabric.api import task, sudo, run, local, warn_only
+from fabric.api import task, sudo, warn_only
 
 from .fs import append_to_file
+
+__all__ = ['create', 'add_to_sudoers', 'add_to_group', 'get_id']
 
 
 @task

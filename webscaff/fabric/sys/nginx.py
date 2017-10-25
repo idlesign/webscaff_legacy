@@ -1,14 +1,16 @@
-from os import path
 from contextlib import contextmanager
-
 from fabric.api import task, sudo, run
+from os import path
 
+from .fs import tail, rm
 from ..settings import PATH_REMOTE_PROJECT_BASE, PROJECT_NAME, NAME_CONFIGS_DIR
 from ..utils import get_symlink_command, get_paths
-from .fs import tail, rm
-
 
 NGINX_MAINTENANCE_FILEPATH = path.join(PATH_REMOTE_PROJECT_BASE, '503')
+
+__all__ = [
+    'stopped', 'maintenance', 'stop', 'restart', 'reload',
+    'log_access', 'log_error', 'maintenance_on', 'maintenance_off', 'bootstrap']
 
 
 @contextmanager
@@ -37,12 +39,6 @@ def maintenance():
 def stop():
     """Stops nginx."""
     sudo('service nginx stop')
-
-
-@task
-def restart():
-    """Restarts nginx."""
-    sudo('service nginx restart')
 
 
 @task

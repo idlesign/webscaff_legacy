@@ -7,11 +7,6 @@ from webscaff import VERSION
 
 
 PATH_BASE = os.path.dirname(__file__)
-PATH_BIN = os.path.join(PATH_BASE, 'bin')
-
-SCRIPTS = None
-if os.path.exists(PATH_BIN):
-    SCRIPTS = [os.path.join('bin', f) for f in os.listdir(PATH_BIN) if os.path.join(PATH_BIN, f)]
 
 PYTEST_RUNNER = ['pytest-runner'] if 'test' in sys.argv else []
 
@@ -41,8 +36,6 @@ setup(
     install_requires=['fabric'],
     setup_requires=[] + PYTEST_RUNNER,
     tests_require=['pytest'],
-
-    scripts=SCRIPTS,
 
     test_suite='tests',
 

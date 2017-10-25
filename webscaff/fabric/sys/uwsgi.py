@@ -1,11 +1,9 @@
+from fabric.api import task, sudo, warn_only
 from os import path
 
-from fabric.api import task, sudo, warn_only
-
+from .fs import tail, touch
 from ..settings import PROJECT_NAME, PATH_REMOTE_PROJECT_BASE, NAME_CONFIGS_DIR
 from ..utils import get_symlink_command, get_paths
-from .fs import tail, touch
-
 
 UWSGI_APPS_PATH = '/etc/uwsgi/apps-enabled/'
 UWSGI_INI_FILEPATH = path.join(UWSGI_APPS_PATH, '%s.ini' % PROJECT_NAME)
@@ -13,6 +11,8 @@ UWSGI_PID_FILEPATH = path.join(PATH_REMOTE_PROJECT_BASE, '%s.pid' % PROJECT_NAME
 UWSGI_TOUCH_RELOAD_FILE = 'reload'
 UWSGI_TOUCH_RELOAD_FILEPATH = path.join(PATH_REMOTE_PROJECT_BASE, UWSGI_TOUCH_RELOAD_FILE)
 
+
+__all__ = ['log', 'start', 'stop', 'reload', 'reload_touch', 'bootstrap']
 
 @task
 def log():
