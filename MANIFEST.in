@@ -11,7 +11,7 @@ recursive-include docs .py
 recursive-include bin *
 recursive-include tests *
 recursive-include webscaff/conf *
-recursive-include webscaff/fabric py
+recursive-include webscaff/fabric *
 
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
