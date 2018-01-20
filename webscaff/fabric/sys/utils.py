@@ -7,7 +7,7 @@ from .nginx import maintenance as nginx_maintenance, stopped as nginx_stopped
 
 __all__ = [
     'set_locale', 'status', 'info', 'reboot', 'upgrade_os_packages',
-    'update_certs', 'swap_make', 'swap_on', 'swap_off']
+    'update_certs', 'swap_make', 'swap_on', 'swap_off', 'shutdown']
 
 
 @task
@@ -40,6 +40,12 @@ def info():
 def reboot():
     """Reboots remote immediately."""
     sudo('shutdown -r now')
+
+
+@task
+def shutdown():
+    """Turns the remote off immediately."""
+    sudo('shutdown now')
 
 
 @task
