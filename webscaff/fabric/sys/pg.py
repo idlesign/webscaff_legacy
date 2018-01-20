@@ -7,7 +7,14 @@ from ..utils import get_symlink_command, get_paths
 
 __all__ = [
     'restart', 'reload', 'psql', 'sizes', 'reindex', 'get_version', 'log_main',
-    'dump', 'bootstrap']
+    'dump', 'bootstrap', 'stop']
+
+
+@task
+def stop():
+    """Stops PostgreSQL."""
+    sudo('service postgresql stop')
+
 
 @task
 def restart():
