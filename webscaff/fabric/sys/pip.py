@@ -22,7 +22,7 @@ def install_from_vcs(package, vcs_path):
 
     """
     with venv():
-        run('pip install -e git+%s#egg=%s' % (vcs_path, package))
+        run('pip3 install -e git+%s#egg=%s' % (vcs_path, package))
 
 
 @task
@@ -48,7 +48,7 @@ def install(package='', update=False, from_req=False, editable=False):
 
     with cd(PATH_GIT_ROOT):
         with venv():
-            run('pip install %s %s' % (' '.join(flags), ' '.join(package)))
+            run('pip3 install %s %s' % (' '.join(flags), ' '.join(package)))
 
 
 @task
@@ -71,4 +71,4 @@ def freeze():
     """Created pip requirements file locally."""
     lcd(PATH_LOCAL_PROJECT)
     with venv():
-        local('pip freeze > %s' % PIP_REQUIREMENTS_FILENAME)
+        local('pip3 freeze > %s' % PIP_REQUIREMENTS_FILENAME)
