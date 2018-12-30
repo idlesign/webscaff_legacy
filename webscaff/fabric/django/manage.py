@@ -1,13 +1,14 @@
 from os import path
 
-from fabric.api import task, get, put, cd, sudo, run
+from fabric.api import task, get, put, cd, sudo, run, env
 
-from ..settings import PROJECT_NAME, PATH_TEMP, PATH_REMOTE_PROJECT
+from ..settings import PROJECT_NAME, PATH_TEMP, PATH_REMOTE_PROJECT, WEBSERVER_USER
 from ..sys.fs import rm, gzip_dir
 from ..sys.venv import venv
 
 __all__ = [
     'manage', 'migrate', 'create_superuser', 'loaddata', 'dumpdata']
+
 
 @task
 def manage(cmd, use_sudo=1):
@@ -20,12 +21,20 @@ def manage(cmd, use_sudo=1):
     if not isinstance(cmd, list):
         cmd = [cmd]
 
-    func = sudo if int(use_sudo) else run
+    use_sudo = int(use_sudo)
+    func = sudo if use_sudo else run
+
     with venv():
         with cd(PATH_REMOTE_PROJECT):
             for c in cmd:
-                func('python manage.py %s' % c)
+                user = env.sudo_user
+                env.sudo_user = WEBSERVER_USER
 
+                try:
+                    func('python manage.py %s' % c)
+
+                except:
+                    env.sudo_user = user
 
 @task
 def migrate():
