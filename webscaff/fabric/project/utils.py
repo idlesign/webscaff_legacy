@@ -59,12 +59,15 @@ def dump():
 @task
 def bootstrap():
     """Bootstraps a remote for your project."""
+
     users.create(PROJECT_USER)
     users.add_to_group(WEBSERVER_USER, PROJECT_GROUP)
 
     apt.bootstrap()
 
     fs.create_dir(PATH_REMOTE_PROJECT_BASE)
+
+    project_fs.home_symlink()
 
     if exists(path.join(PATH_REMOTE_PROJECT, '.git')):
         update()
