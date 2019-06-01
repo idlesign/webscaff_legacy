@@ -12,9 +12,7 @@ BOOTSTRAP_SYSTEM_PACKAGES = [
     'python3-pip',
     'python-virtualenv',
 
-    'postgresql',
-    'libpq-dev',
-    'python3-psycopg2',
+    'postgresql', 'libpq-dev',
 
     # Pillow requirement.
     'libjpeg-dev',
