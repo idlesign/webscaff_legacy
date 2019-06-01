@@ -14,7 +14,7 @@ GIT_REPO_EXTENDED = bool(getattr(env, 'repo_extended', False))
 
 WEBSERVER_USER = getattr(env, 'webserver_user', 'www-data')
 
-PROJECT_USER = PROJECT_NAME
+PROJECT_USER = env.project_user or PROJECT_NAME
 PROJECT_GROUP = PROJECT_USER
 
 PATH_TEMP = '/tmp'
