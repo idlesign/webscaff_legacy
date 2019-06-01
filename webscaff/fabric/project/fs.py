@@ -8,7 +8,7 @@ from ..sys.fs import create_dir as fs_create_dir
 from ..sys.uwsgi import reload_touch as uwsgi_reload_touch
 from ..utils import get_paths, get_symlink_command
 
-__all__ = ['upload_configs', 'put_files']
+__all__ = ['upload_configs', 'put_files', 'home_symlink']
 
 
 @task
