@@ -27,7 +27,7 @@ def update(deep=False):
 
 @task
 def dump():
-    """Dumps remote project directories and DB."""
+    """Dumps remote project related directories and DB."""
 
     date_str = datetime.now().strftime('%Y-%m-%dT%H%M')
     dump_basename = '%s-%s_dump' % (date_str, PROJECT_NAME)
@@ -35,12 +35,18 @@ def dump():
 
     fs.mkdir(path_dump, use_sudo=False)
 
+    # Django static.
     fs.gzip_dir(
         path.join(PATH_REMOTE_PROJECT, 'data', 'media'),
         path.join(path_dump, 'media'))
 
+    # Let's Encrypt certificates.
+    fs.gzip_dir('/etc/letsencrypt', path.join(path_dump, 'certbot'), do_sudo=True)
+
+    # Database dump.
     pg.dump(PROJECT_NAME, path_dump)
 
+    # Archive all dumped.
     path_dump_arch = fs.gzip_dir(path_dump, path.join(PATH_TEMP, dump_basename))
 
     path_dump_local = path.join(PATH_LOCAL_PROJECT_BASE, 'dumps')
