@@ -1,14 +1,20 @@
 from os import path
 
-from fabric.api import task, put
+from fabric.api import task, put, sudo
 from fabric.contrib.project import upload_project
 
-from ..settings import NAME_CONFIGS_DIR
+from ..settings import NAME_CONFIGS_DIR, PATH_REMOTE_PROJECT_BASE, PROJECT_NAME
 from ..sys.fs import create_dir as fs_create_dir
 from ..sys.uwsgi import reload_touch as uwsgi_reload_touch
-from ..utils import get_paths
+from ..utils import get_paths, get_symlink_command
 
 __all__ = ['upload_configs', 'put_files']
+
+
+@task
+def home_symlink():
+    """Create symlinks in user's home to project directory."""
+    sudo(get_symlink_command(PATH_REMOTE_PROJECT_BASE, '~/%s' % PROJECT_NAME))
 
 
 @task
