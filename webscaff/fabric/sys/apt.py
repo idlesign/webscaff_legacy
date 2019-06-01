@@ -21,6 +21,12 @@ BOOTSTRAP_SYSTEM_PACKAGES = [
     # lxml requirement.
     'libxml2-dev',
     'libxslt1-dev',
+
+    # Utils.
+    'mc',
+    'htop',
+    'certbot',
+    'net-tools',
 ]
 
 __all__ = ['upgrade_os', 'update', 'upgrade', 'install', 'remove', 'bootstrap']
