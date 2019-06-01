@@ -117,7 +117,7 @@ def bootstrap():
     sudo(get_symlink_command(path_pg_config_remote, path.join(path_pg_confs, target_name)))
 
     # Append into main config an include line.
-    append_to_file('"include = \'%s\'"' % target_name, path_remote_base_config)
+    append_to_file("include = '%s'" % target_name, path_remote_base_config)
 
     # Create user and db.
     with settings(sudo_user='postgres'):
