@@ -85,7 +85,7 @@ def reindex(table):
 def get_version():
     """Returns a list with PostgreSQL version number."""
     version = run('pg_config --version')
-    version = version.split(' ')[-1].split('.')
+    version = version.split(' ')[:2][-1].split('.')
     print('PostgreSQL version: %s' % version)
     return version
 
