@@ -17,13 +17,12 @@ BOOTSTRAP_SYSTEM_PACKAGES = [
     # Pillow requirement.
     'libjpeg-dev',
     # lxml requirement.
-    'libxml2-dev',
-    'libxslt1-dev',
+    'libxml2-dev', 'libxslt1-dev',
 
     # Utils.
     'mc',
     'htop',
-    'certbot',
+    'certbot', 'python3-certbot-nginx',
     'net-tools',
 ]
 
