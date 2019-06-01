@@ -122,5 +122,5 @@ def bootstrap():
     # Create user and db.
     with settings(sudo_user='postgres'):
         sudo('createdb %s' % PROJECT_NAME)
-        sudo('createuser -P %s' % PROJECT_NAME)
-        sudo('psql -c "GRANT ALL PRIVILEGES ON DATABASE %s TO %s"' % (PROJECT_NAME, PROJECT_NAME))
+        sudo('createuser -P %s' % PROJECT_USER)
+        sudo('psql -c "GRANT ALL PRIVILEGES ON DATABASE %s TO %s"' % (PROJECT_NAME, PROJECT_USER))
