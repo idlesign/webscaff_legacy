@@ -35,7 +35,7 @@ def create_dir(path):
 
 
 @task
-def gzip_dir(src, target_fname, change_dir=None):
+def gzip_dir(src, target_fname, change_dir=None, do_sudo=False):
     """GZips a directory."""
     arch_ext = '.tar.gz'
 
@@ -46,7 +46,8 @@ def gzip_dir(src, target_fname, change_dir=None):
     if change_dir:
         change_dir = '-C %s' % change_dir
 
-    run('tar -czf %s %s %s' % (target_fname, change_dir, src))
+    command = sudo if do_sudo else run
+    command('tar -czf %s %s %s' % (target_fname, change_dir, src))
 
     return target_fname
 
