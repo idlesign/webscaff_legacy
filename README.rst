@@ -9,6 +9,11 @@ https://github.com/idlesign/webscaff
     :target: https://pypi.python.org/pypi/webscaff
 
 
+Legacy
+------
+**This project goes legacy having the successor:** https://github.com/idlesign/webscaff
+
+
 Description
 -----------
 
